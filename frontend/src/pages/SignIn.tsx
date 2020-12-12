@@ -19,7 +19,30 @@ let useStyles = makeStyles({
         flexDirection: 'column',
         alignItems: "center",
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        boxSizing: "border-box",
+        padding: "15px"
+    },
+    loginTwitterIcon: {
+        alignSelf: "flex-start",
+        fontSize: "50px",
+    },
+    loginAsideTittle: {
+        "fontWeight": 'bold',
+        marginBottom: "1em",
+        marginTop: '1em'
+    },
+    loginAsideDescription: {
+        fontWeight: 'bold',
+        fontSize: '15px',
+        marginBottom: '1em'
+    },
+    wrapperLogin: {
+        maxWidth: '380px',
+        width: '100%'
+    },
+    buttonReg: {
+        marginBottom: "15px"
     }
 });
 
@@ -42,14 +65,17 @@ function SignIn () {
            </ul>
         </div>
         <div className={classes.loginAside}>
-            <TwitterIcon />
-            <Typography>Узнайте, что происходит в мире прямо сейчас</Typography>
-            <Typography>Присоединяйтесь к Твиттеру прямо сейчас!</Typography>
-            <ButtonSemicircularEdge
-                disableRipple={true}
-                variant="contained"
-                color="primary">Зарегистрироваться</ButtonSemicircularEdge>
-            <ButtonSemicircularEdge variant="outlined" color="primary">Войти</ButtonSemicircularEdge>
+            <div className={classes.wrapperLogin}>
+                <TwitterIcon color="primary" className={classes.loginTwitterIcon} />
+                <Typography className={classes.loginAsideTittle} variant="h5" component="h1">Узнайте, что происходит в мире прямо сейчас</Typography>
+                <Typography className={classes.loginAsideDescription}>Присоединяйтесь к Твиттеру прямо сейчас!</Typography>
+                <ButtonSemicircularEdge
+                    className={classes.buttonReg}
+                    disableRipple={true}
+                    variant="contained"
+                    color="primary">Зарегистрироваться</ButtonSemicircularEdge>
+                <ButtonSemicircularEdge variant="outlined" color="primary">Войти</ButtonSemicircularEdge>
+            </div>
         </div>
     </div>
 }

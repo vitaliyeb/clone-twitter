@@ -1,5 +1,14 @@
-import React from 'react';
-import { makeStyles, Typography } from "@material-ui/core";
+import React, { useState } from 'react';
+import {
+    Button,
+    Dialog, DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    makeStyles,
+    TextField,
+    Typography
+} from "@material-ui/core";
 import { ButtonSemicircularEdge } from '../myUiComponent/buttons';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import SearchIcon from '@material-ui/icons/Search';
@@ -88,6 +97,16 @@ let useStyles = makeStyles({
 
 function SignIn () {
     let classes = useStyles();
+    let [isRegModal, setModalReg] = useState(false);
+    let [isOpenModal, setModalOpen] = useState(false);
+
+    let handleModalReg = (value: any)=> {
+        setModalReg(false);
+    };
+
+    let handleModalOpen = () => {
+        setModalOpen(false);
+    }
 
     return <div className={classes.wrapper}>
         <div className={classes.blueAside}>
@@ -120,6 +139,58 @@ function SignIn () {
                 <ButtonSemicircularEdge variant="outlined" color="primary">Войти</ButtonSemicircularEdge>
             </div>
         </div>
+
+        <Dialog open={isRegModal} onClose={handleModalOpen} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    To subscribe to this website, please enter your email address here. We will send updates
+                    occasionally.
+                </DialogContentText>
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Email Address"
+                    type="email"
+                    fullWidth
+                />
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleModalOpen} color="primary">
+                    Cancel
+                </Button>
+                <Button onClick={handleModalOpen} color="primary">
+                    Subscribe
+                </Button>
+            </DialogActions>
+        </Dialog>
+
+        <Dialog open={isRegModal} onClose={handleModalReg} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    To subscribe to this website, please enter your email address here. We will send updates
+                    occasionally.
+                </DialogContentText>
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Email Address"
+                    type="email"
+                    fullWidth
+                />
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleModalReg} color="primary">
+                    Cancel
+                </Button>
+                <Button onClick={handleModalReg} color="primary">
+                    Subscribe
+                </Button>
+            </DialogActions>
+        </Dialog>
     </div>
 };
 

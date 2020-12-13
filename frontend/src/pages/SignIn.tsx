@@ -16,6 +16,8 @@ let useStyles = makeStyles({
         backgroundColor: '#74cafc',
         width: '50%',
         display: 'flex',
+        position: "relative",
+        overflow: 'hidden',
         justifyContent: 'center',
         alignItems: 'center',
         boxSizing: "border-box",
@@ -23,6 +25,8 @@ let useStyles = makeStyles({
     },
     blueAsideUl:{
         maxWidth: '380px',
+        position: 'relative',
+        zIndex: 2,
         width: '100%',
         listStyle: 'none',
         '& li': {
@@ -70,6 +74,14 @@ let useStyles = makeStyles({
     },
     buttonReg: {
         marginBottom: "15px"
+    },
+    twitterIconBlueAside: {
+        position: "absolute",
+        left: 0,
+        top: 0,
+        width: '200%',
+        transform: "translate(-13%, -25%)",
+        height: '200%'
     }
 });
 
@@ -79,6 +91,7 @@ function SignIn () {
 
     return <div className={classes.wrapper}>
         <div className={classes.blueAside}>
+            <TwitterIcon color="primary" className={classes.twitterIconBlueAside} />
            <ul className={classes.blueAsideUl}>
                <li>
                    <SearchIcon />
@@ -108,7 +121,7 @@ function SignIn () {
             </div>
         </div>
     </div>
-}
+};
 
 
 export default SignIn;

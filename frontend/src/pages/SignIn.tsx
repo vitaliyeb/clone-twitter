@@ -2,7 +2,9 @@ import React from 'react';
 import { makeStyles, Typography } from "@material-ui/core";
 import { ButtonSemicircularEdge } from '../myUiComponent/buttons';
 import TwitterIcon from '@material-ui/icons/Twitter';
-
+import SearchIcon from '@material-ui/icons/Search';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
 
 let useStyles = makeStyles({
     wrapper: {
@@ -12,7 +14,32 @@ let useStyles = makeStyles({
     },
     blueAside: {
         backgroundColor: '#74cafc',
-        width: '50%'
+        width: '50%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        boxSizing: "border-box",
+        padding: "15px"
+    },
+    blueAsideUl:{
+        maxWidth: '380px',
+        width: '100%',
+        listStyle: 'none',
+        '& li': {
+            display: 'flex',
+            marginBottom: '40px',
+            alignItems: 'center',
+            '& svg': {
+                color: '#fff',
+                fontSize: '29px'
+            },
+            '& p': {
+                marginLeft: '15px',
+                fontWeight: 'bold',
+                fontSize: '19px',
+                color: '#fff'
+            }
+        }
     },
     loginAside: {
         width: '50%',
@@ -52,14 +79,17 @@ function SignIn () {
 
     return <div className={classes.wrapper}>
         <div className={classes.blueAside}>
-           <ul>
+           <ul className={classes.blueAsideUl}>
                <li>
+                   <SearchIcon />
                    <Typography>Читайте о том, что вам интересно.</Typography>
                </li>
                <li>
+                   <PeopleOutlineIcon />
                    <Typography>Узнайте, о чем говорят в мире.</Typography>
                </li>
                <li>
+                   <ModeCommentOutlinedIcon />
                    <Typography>Присоединяйтесь к общению.</Typography>
                </li>
            </ul>

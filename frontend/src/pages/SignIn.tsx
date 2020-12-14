@@ -14,6 +14,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import SearchIcon from '@material-ui/icons/Search';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
+import {log} from "util";
 
 let useStyles = makeStyles({
     wrapper: {
@@ -132,15 +133,19 @@ function SignIn () {
                 <Typography className={classes.loginAsideTittle} variant="h5" component="h1">Узнайте, что происходит в мире прямо сейчас</Typography>
                 <Typography className={classes.loginAsideDescription}>Присоединяйтесь к Твиттеру прямо сейчас!</Typography>
                 <ButtonSemicircularEdge
+                    onClick={()=>setModalReg(true)}
                     className={classes.buttonReg}
                     disableRipple={true}
                     variant="contained"
                     color="primary">Зарегистрироваться</ButtonSemicircularEdge>
-                <ButtonSemicircularEdge variant="outlined" color="primary">Войти</ButtonSemicircularEdge>
+                <ButtonSemicircularEdge
+                    onClick={()=>setModalOpen(true)}
+                    variant="outlined"
+                    color="primary">Войти</ButtonSemicircularEdge>
             </div>
         </div>
 
-        <Dialog open={isRegModal} onClose={handleModalOpen} aria-labelledby="form-dialog-title">
+        <Dialog open={isOpenModal} onClose={handleModalOpen} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
             <DialogContent>
                 <DialogContentText>

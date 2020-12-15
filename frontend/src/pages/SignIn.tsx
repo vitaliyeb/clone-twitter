@@ -92,6 +92,20 @@ let useStyles = makeStyles({
         width: '200%',
         transform: "translate(-13%, -25%)",
         height: '200%'
+    },
+    dialogHeader: {
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center'
+    },
+    dialogHeaderLogo: {
+        fontSize: '24px',
+        margin: '0 auto'
+    },
+    dialogNext: {
+        width: 'auto',
+        fontSize: '15px',
+        lineHeight: '1.2em'
     }
 });
 
@@ -171,8 +185,18 @@ function SignIn () {
             </DialogActions>
         </Dialog>
 
-        <Dialog open={isRegModal} onClose={handleModalReg} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <Dialog open={ true } onClose={handleModalReg} aria-labelledby="form-dialog-title">
+            <DialogContent className={classes.dialogHeader}>
+                <TwitterIcon color="primary" className={classes.dialogHeaderLogo} />
+                <ButtonSemicircularEdge
+                    onClick={()=>setModalReg(true)}
+                    className={classes.dialogNext}
+                    disableRipple={true}
+                    variant="contained"
+                    color="primary">Далее</ButtonSemicircularEdge>
+            </DialogContent>
+`   `
+
             <DialogContent>
                 <DialogContentText>
                     To subscribe to this website, please enter your email address here. We will send updates

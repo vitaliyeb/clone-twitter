@@ -106,6 +106,10 @@ let useStyles = makeStyles({
         width: 'auto',
         fontSize: '15px',
         lineHeight: '1.2em'
+    },
+    dialogSubheading: {
+        fontSize: '23px',
+        paddingTop: '0px'
     }
 });
 
@@ -159,7 +163,7 @@ function SignIn () {
             </div>
         </div>
 
-        <Dialog open={isOpenModal} onClose={handleModalOpen} aria-labelledby="form-dialog-title">
+        <Dialog fullWidth open={isOpenModal} onClose={handleModalOpen} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
             <DialogContent>
                 <DialogContentText>
@@ -185,7 +189,7 @@ function SignIn () {
             </DialogActions>
         </Dialog>
 
-        <Dialog open={ true } onClose={handleModalReg} aria-labelledby="form-dialog-title">
+        <Dialog fullWidth open={ true } onClose={handleModalReg} aria-labelledby="form-dialog-title">
             <DialogContent className={classes.dialogHeader}>
                 <TwitterIcon color="primary" className={classes.dialogHeaderLogo} />
                 <ButtonSemicircularEdge
@@ -195,21 +199,29 @@ function SignIn () {
                     variant="contained"
                     color="primary">Далее</ButtonSemicircularEdge>
             </DialogContent>
-`   `
-
+            <DialogTitle disableTypography={true} className={classes.dialogSubheading}>Создайте учетную запись</DialogTitle>
             <DialogContent>
-                <DialogContentText>
-                    To subscribe to this website, please enter your email address here. We will send updates
-                    occasionally.
-                </DialogContentText>
                 <TextField
                     autoFocus
                     margin="dense"
                     id="name"
-                    label="Email Address"
-                    type="email"
+                    label="Имя"
+                    type="text"
                     fullWidth
                 />
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="phone"
+                    label="Телефон"
+                    type="text"
+                    fullWidth
+                />
+                <Typography>Дата рождения</Typography>
+                <Typography>
+                    Эта информация не будет общедоступной. Подтвердите свой возраст, даже если эта учетная запись
+                    предназначена для компании, домашнего животного и т. д.
+                </Typography>
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleModalReg} color="primary">

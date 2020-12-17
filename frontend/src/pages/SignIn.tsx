@@ -137,7 +137,7 @@ function SignIn () {
         setMonth(event.target.value)
     }
 
-
+    console.log('s')
     return <div className={classes.wrapper}>
         <div className={classes.blueAside}>
             <TwitterIcon color="primary" className={classes.twitterIconBlueAside} />
@@ -233,33 +233,6 @@ function SignIn () {
                     Эта информация не будет общедоступной. Подтвердите свой возраст, даже если эта учетная запись
                     предназначена для компании, домашнего животного и т. д.
                 </Typography>
-
-                <FormControl>
-                    <InputLabel htmlFor="age-native-simple">Месяц</InputLabel>
-                    <Select
-                        native
-                        value={month}
-                        onChange={handleSelectMonth}
-                        inputProps={{
-                            name: 'age',
-                            id: 'age-native-simple',
-                        }}
-                    >
-                        <option aria-label="None" value="" />
-                        <option value="Январь">Январь</option>
-                        <option value="Февраль">Февраль</option>
-                        <option value="Март">Март</option>
-                        <option value="Апрель">Апрель</option>
-                        <option value="Май">Май</option>
-                        <option value="Июнь">Июнь</option>
-                        <option value="Июль">Июль</option>
-                        <option value="Август">Август</option>
-                        <option value="Сентябрь">Сентябрь</option>
-                        <option value="Октябрь">Октябрь</option>
-                        <option value="Ноябрь">Ноябрь</option>
-                        <option value="Декабрь">Декабрь</option>
-                    </Select>
-                </FormControl>
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleModalReg} color="primary">

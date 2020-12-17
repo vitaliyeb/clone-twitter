@@ -6,7 +6,11 @@ import {
     DialogContentText,
     DialogTitle,
     makeStyles,
+    Select,
     TextField,
+    MenuItem,
+    FormControl,
+    InputLabel,
     Typography
 } from "@material-ui/core";
 import { ButtonSemicircularEdge } from '../myUiComponent/buttons';
@@ -119,6 +123,8 @@ function SignIn () {
     let [isRegModal, setModalReg] = useState(false);
     let [isOpenModal, setModalOpen] = useState(false);
 
+    let [month, setMonth] = useState('');
+
     let handleModalReg = (value: any)=> {
         setModalReg(false);
     };
@@ -126,6 +132,11 @@ function SignIn () {
     let handleModalOpen = () => {
         setModalOpen(false);
     }
+
+    let handleSelectMonth = (event: any)=>{
+        setMonth(event.target.value)
+    }
+
 
     return <div className={classes.wrapper}>
         <div className={classes.blueAside}>
@@ -222,6 +233,33 @@ function SignIn () {
                     Эта информация не будет общедоступной. Подтвердите свой возраст, даже если эта учетная запись
                     предназначена для компании, домашнего животного и т. д.
                 </Typography>
+
+                <FormControl>
+                    <InputLabel htmlFor="age-native-simple">Месяц</InputLabel>
+                    <Select
+                        native
+                        value={month}
+                        onChange={handleSelectMonth}
+                        inputProps={{
+                            name: 'age',
+                            id: 'age-native-simple',
+                        }}
+                    >
+                        <option aria-label="None" value="" />
+                        <option value="Январь">Январь</option>
+                        <option value="Февраль">Февраль</option>
+                        <option value="Март">Март</option>
+                        <option value="Апрель">Апрель</option>
+                        <option value="Май">Май</option>
+                        <option value="Июнь">Июнь</option>
+                        <option value="Июль">Июль</option>
+                        <option value="Август">Август</option>
+                        <option value="Сентябрь">Сентябрь</option>
+                        <option value="Октябрь">Октябрь</option>
+                        <option value="Ноябрь">Ноябрь</option>
+                        <option value="Декабрь">Декабрь</option>
+                    </Select>
+                </FormControl>
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleModalReg} color="primary">

@@ -1,24 +1,17 @@
 import React, { useState } from 'react';
 import {
-    Button,
-    Dialog, DialogActions,
+    Button, DialogActions,
     DialogContent,
-    DialogContentText,
-    DialogTitle,
-    makeStyles,
-    TextField,
-    MenuItem,
-    FormControl,
-    InputLabel,
+    makeStyles, TextField,
     Typography
 } from "@material-ui/core";
 import { ButtonSemicircularEdge } from '../myUiComponent/buttons';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import SearchIcon from '@material-ui/icons/Search';
-import CloseIcon from '@material-ui/icons/Close';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
-import {log} from "util";
+import DialogModalBox from "../components/modalBlock";
+
 
 let useStyles = makeStyles({
     wrapper: {
@@ -97,20 +90,6 @@ let useStyles = makeStyles({
         transform: "translate(-13%, -25%)",
         height: '200%'
     },
-    dialogHeader: {
-        display: 'flex',
-        alignItems: 'center'
-    },
-    dialogClose: {
-        width: 'auto',
-        fontSize: '15px',
-        lineHeight: '1.2em'
-    },
-    dialogSubheading: {
-        fontSize: '23px',
-        padding: '0',
-        marginLeft: "20px"
-    },
     circleButton: {
         borderRadius: "100px"
     }
@@ -121,20 +100,6 @@ function SignIn () {
     let classes = useStyles();
     let [isRegModal, setModalReg] = useState(false);
     let [isOpenModal, setModalOpen] = useState(false);
-
-    let [month, setMonth] = useState('');
-
-    let handleModalReg = (value: any)=> {
-        setModalReg(false);
-    };
-
-    let handleModalOpen = () => {
-        setModalOpen(false);
-    }
-
-    let handleSelectMonth = (event: any)=>{
-        setMonth(event.target.value)
-    }
 
     return <div className={classes.wrapper}>
         <div className={classes.blueAside}>
@@ -172,77 +137,34 @@ function SignIn () {
             </div>
         </div>
 
-        <Dialog fullWidth open={ false } onClose={handleModalReg} aria-labelledby="form-dialog-title">
-            <DialogContent className={classes.dialogHeader}>
-                <CloseIcon
-                    color="primary"
-                    onClick={()=>setModalReg(false)}/>
-                    <Typography></Typography>
-            </DialogContent>
-            <DialogTitle disableTypography={true} className={classes.dialogSubheading}>Создайте учетную запись</DialogTitle>
-            <DialogContent>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Имя"
-                    type="text"
-                    fullWidth
-                />
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="phone"
-                    label="Телефон"
-                    type="text"
-                    fullWidth
-                />
-                <Typography>Дата рождения</Typography>
-                <Typography>
-                    Эта информация не будет общедоступной. Подтвердите свой возраст, даже если эта учетная запись
-                    предназначена для компании, домашнего животного и т. д.
-                </Typography>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleModalReg} color="primary">
-                    Cancel
-                </Button>
-                <Button onClick={handleModalReg} color="primary">
-                    Subscribe
-                </Button>
-            </DialogActions>
-        </Dialog>
-
-        <Dialog fullWidth open={true} onClose={handleModalOpen} aria-labelledby="form-dialog-title">
-            <DialogContent className={classes.dialogHeader}>
-                <CloseIcon color="primary"/>
-                <DialogTitle className={classes.dialogSubheading} id="form-dialog-title">Войти в твиттер</DialogTitle>
-            </DialogContent>
-
-            <DialogContent>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="E-Mail"
-                    type="email"
-                    fullWidth
-                />
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Пароль"
-                    type="password"
-                    fullWidth
-                />
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleModalOpen} disableRipple className={classes.circleButton} variant="contained" color="primary">
-                    Войти
-                </Button>
-            </DialogActions>
-        </Dialog>
+        <DialogModalBox onClose={()=>setModalOpen(false)} visible={isOpenModal} title={'Войти в твиттер'}>
+            <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="E-Mail"
+                type="email"
+                fullWidth
+            />
+            <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Пароль"
+                type="password"
+                fullWidth
+            />
+            <br/><br/>
+            <Button
+                onClick={()=>setModalOpen(false)}
+                disableRipple
+                fullWidth
+                className={classes.circleButton}
+                variant="contained"
+                color="primary">
+                Войти
+            </Button>
+        </DialogModalBox>
     </div>
 };
 

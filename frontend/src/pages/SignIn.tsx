@@ -6,7 +6,6 @@ import {
     DialogContentText,
     DialogTitle,
     makeStyles,
-    Select,
     TextField,
     MenuItem,
     FormControl,
@@ -16,6 +15,7 @@ import {
 import { ButtonSemicircularEdge } from '../myUiComponent/buttons';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import SearchIcon from '@material-ui/icons/Search';
+import CloseIcon from '@material-ui/icons/Close';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
 import {log} from "util";
@@ -98,22 +98,21 @@ let useStyles = makeStyles({
         height: '200%'
     },
     dialogHeader: {
-        position: 'relative',
         display: 'flex',
         alignItems: 'center'
     },
-    dialogHeaderLogo: {
-        fontSize: '24px',
-        margin: '0 auto'
-    },
-    dialogNext: {
+    dialogClose: {
         width: 'auto',
         fontSize: '15px',
         lineHeight: '1.2em'
     },
     dialogSubheading: {
         fontSize: '23px',
-        paddingTop: '0px'
+        padding: '0',
+        marginLeft: "20px"
+    },
+    circleButton: {
+        borderRadius: "100px"
     }
 });
 
@@ -137,7 +136,6 @@ function SignIn () {
         setMonth(event.target.value)
     }
 
-    console.log('s')
     return <div className={classes.wrapper}>
         <div className={classes.blueAside}>
             <TwitterIcon color="primary" className={classes.twitterIconBlueAside} />
@@ -174,41 +172,12 @@ function SignIn () {
             </div>
         </div>
 
-        <Dialog fullWidth open={isOpenModal} onClose={handleModalOpen} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-            <DialogContent>
-                <DialogContentText>
-                    To subscribe to this website, please enter your email address here. We will send updates
-                    occasionally.
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Email Address"
-                    type="email"
-                    fullWidth
-                />
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleModalOpen} color="primary">
-                    Cancel
-                </Button>
-                <Button onClick={handleModalOpen} color="primary">
-                    Subscribe
-                </Button>
-            </DialogActions>
-        </Dialog>
-
-        <Dialog fullWidth open={ true } onClose={handleModalReg} aria-labelledby="form-dialog-title">
+        <Dialog fullWidth open={ false } onClose={handleModalReg} aria-labelledby="form-dialog-title">
             <DialogContent className={classes.dialogHeader}>
-                <TwitterIcon color="primary" className={classes.dialogHeaderLogo} />
-                <ButtonSemicircularEdge
-                    onClick={()=>setModalReg(true)}
-                    className={classes.dialogNext}
-                    disableRipple={true}
-                    variant="contained"
-                    color="primary">Далее</ButtonSemicircularEdge>
+                <CloseIcon
+                    color="primary"
+                    onClick={()=>setModalReg(false)}/>
+                    <Typography></Typography>
             </DialogContent>
             <DialogTitle disableTypography={true} className={classes.dialogSubheading}>Создайте учетную запись</DialogTitle>
             <DialogContent>
@@ -240,6 +209,37 @@ function SignIn () {
                 </Button>
                 <Button onClick={handleModalReg} color="primary">
                     Subscribe
+                </Button>
+            </DialogActions>
+        </Dialog>
+
+        <Dialog fullWidth open={true} onClose={handleModalOpen} aria-labelledby="form-dialog-title">
+            <DialogContent className={classes.dialogHeader}>
+                <CloseIcon color="primary"/>
+                <DialogTitle className={classes.dialogSubheading} id="form-dialog-title">Войти в твиттер</DialogTitle>
+            </DialogContent>
+
+            <DialogContent>
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="E-Mail"
+                    type="email"
+                    fullWidth
+                />
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Пароль"
+                    type="password"
+                    fullWidth
+                />
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleModalOpen} disableRipple className={classes.circleButton} variant="contained" color="primary">
+                    Войти
                 </Button>
             </DialogActions>
         </Dialog>

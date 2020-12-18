@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
     Button, DialogActions,
-    DialogContent,
+    DialogContent, FormControl, FormGroup,
     makeStyles, TextField,
     Typography
 } from "@material-ui/core";
@@ -13,7 +13,7 @@ import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
 import DialogModalBox from "../components/modalBlock";
 
 
-let useStyles = makeStyles({
+let useStyles = makeStyles((theme)=> ({
     wrapper: {
         height: '100vh',
         display: 'flex',
@@ -92,14 +92,32 @@ let useStyles = makeStyles({
     },
     circleButton: {
         borderRadius: "100px"
+    },
+    modalField: {
+        marginBottom: theme.spacing(2)
+    },
+    registerFormControl: {
+        marginBottom: theme.spacing(2)
+    },
+    openFormControl: {
+        marginBottom: theme.spacing(2)
     }
-});
+}));
 
 
 function SignIn () {
     let classes = useStyles();
-    let [isRegModal, setModalReg] = useState(false);
-    let [isOpenModal, setModalOpen] = useState(false);
+
+    type visibleBoxType = 'signIn' | 'signUp';
+    let [visibleBlockModal, setVisibleBlockModal] = useState<visibleBoxType>();
+
+    function handleCloseBlockModal(): void{
+        setVisibleBlockModal(undefined);
+    }
+
+    function handleSetVisibleBoxModal (blockName: visibleBoxType): void{
+        setVisibleBlockModal(blockName);
+    }
 
     return <div className={classes.wrapper}>
         <div className={classes.blueAside}>
@@ -125,45 +143,97 @@ function SignIn () {
                 <Typography className={classes.loginAsideTittle} variant="h5" component="h1">Узнайте, что происходит в мире прямо сейчас</Typography>
                 <Typography className={classes.loginAsideDescription}>Присоединяйтесь к Твиттеру прямо сейчас!</Typography>
                 <ButtonSemicircularEdge
-                    onClick={()=>setModalReg(true)}
+                    onClick={()=>handleSetVisibleBoxModal('signUp')}
                     className={classes.buttonReg}
                     disableRipple={true}
                     variant="contained"
                     color="primary">Зарегистрироваться</ButtonSemicircularEdge>
                 <ButtonSemicircularEdge
-                    onClick={()=>setModalOpen(true)}
+                    onClick={()=>handleSetVisibleBoxModal('signIn')}
                     variant="outlined"
                     color="primary">Войти</ButtonSemicircularEdge>
             </div>
         </div>
 
-        <DialogModalBox onClose={()=>setModalOpen(false)} visible={isOpenModal} title={'Войти в твиттер'}>
-            <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                label="E-Mail"
-                type="email"
-                fullWidth
-            />
-            <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                label="Пароль"
-                type="password"
-                fullWidth
-            />
-            <br/><br/>
-            <Button
-                onClick={()=>setModalOpen(false)}
-                disableRipple
-                fullWidth
-                className={classes.circleButton}
-                variant="contained"
-                color="primary">
-                Войти
-            </Button>
+        <DialogModalBox
+            onClose={handleCloseBlockModal}
+            visible={visibleBlockModal === 'signUp'}
+            title={'Создайте учётную запись'}
+        >
+            <FormControl variant="filled" fullWidth className={classes.registerFormControl} >
+                <FormGroup>
+                    <TextField
+                        className={classes.modalField}
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Имя"
+                        type="text"
+                        fullWidth
+                    />
+                    <TextField
+                        className={classes.modalField}
+                        autoFocus
+                        margin="dense"
+                        id="mail"
+                        label="E-Mail"
+                        type="email"
+                        fullWidth
+                    />
+                    <TextField
+                        className={classes.modalField}
+                        autoFocus
+                        margin="dense"
+                        id="password"
+                        label="Пароль"
+                        type="password"
+                        fullWidth
+                    />
+                    <Button
+                        onClick={handleCloseBlockModal}
+                        disableRipple
+                        fullWidth
+                        className={classes.circleButton}
+                        variant="contained"
+                        color="primary">
+                        Войти
+                    </Button>
+                </FormGroup>
+            </FormControl>
+        </DialogModalBox>
+
+        <DialogModalBox onClose={handleCloseBlockModal} visible={visibleBlockModal === 'signIn'} title={'Войти в твиттер'}>
+            <FormControl fullWidth className={classes.openFormControl}>
+                <FormGroup>
+                    <TextField
+                        className={classes.modalField}
+                        autoFocus
+                        margin="dense"
+                        id="mail"
+                        label="E-Mail"
+                        type="email"
+                        fullWidth
+                    />
+                    <TextField
+                        className={classes.modalField}
+                        autoFocus
+                        margin="dense"
+                        id="password"
+                        label="Пароль"
+                        type="password"
+                        fullWidth
+                    />
+                    <Button
+                        onClick={handleCloseBlockModal}
+                        disableRipple
+                        fullWidth
+                        className={classes.circleButton}
+                        variant="contained"
+                        color="primary">
+                        Войти
+                    </Button>
+                </FormGroup>
+            </FormControl>
         </DialogModalBox>
     </div>
 };
